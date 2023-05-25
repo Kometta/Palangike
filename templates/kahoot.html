@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Flask App
+{% endblock %}
+
+{% block content %}
+    <h1>Latest Kahoot Information</h1>
+    <p>First Element: {{ first_element }}</p>
+    <p>File Date: {{ file_date }}</p>
+
+    <form method="POST" action="{{ url_for('extract') }}">
+        <input type="submit" value="Extract Latest Information">
+    </form>
+{% endblock %}

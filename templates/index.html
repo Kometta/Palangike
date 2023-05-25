@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Flask App
+{% endblock %}
+
+{% block content %}
+    <h1>Latest Information</h1>
+    <p>First Element: {{ first_element }}</p>
+    <p>File Date: {{ file_date }}</p>
+
+    <form method="POST" action="{{ url_for('fetch') }}">
+        <input type="submit" value="Fetch Newest Information">
+    </form>
+{% endblock %}

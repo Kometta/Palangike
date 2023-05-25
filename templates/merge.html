@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Flask App
+{% endblock %}
+
+{% block content %}
+    <h1>Latest Merged Data Information</h1>
+    <p>First Element: {{ first_element }}</p>
+    <p>File Date: {{ file_date }}</p>
+
+    <form method="POST" action="{{ url_for('merged') }}">
+        <input type="submit" value="Merge Classroom and Kahoot data">
+    </form>
+
+    <h2>Data from merged csv</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Username</th>
+                <th>GoogleClassroom score</th>
+                <th>Kahoot score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+                {% if show_csv %}
+                <tr>
+                    <td>{{ row[''] }}</td>
+                    <td>{{ row['username'] }}</td>
+                    <td>{{ row['grade'] }}</td>
+                    <td>{{ row['kahoot_score'] }}</td>
+
+                    <!-- Display other columns here -->
+                </tr>
+                {% else %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+
+                    <!-- Display other columns here -->
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}
