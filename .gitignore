@@ -1,8 +1,8 @@
 credentials.json
 token.json
-# uploads
+uploads
 .idea
 venv
-# downloads
+downloads
 wenv
 config.json
