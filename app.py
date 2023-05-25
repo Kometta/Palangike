@@ -218,7 +218,7 @@ def merge_data():
     classroomData = pd.read_json(os.path.join(app.config['DOWNLOAD_FOLDER'], courseWorkFilename))
 
     classroomData = classroomData.transpose()
-    kahootData = pd.read_json(os.path.join(app.config['DOWNLOAD_FOLDER'], "kahoot_info.json"))
+    kahootData = pd.read_json(os.path.join(app.config['UPLOAD_FOLDER'], "kahoot_info.json"))
     merged_df = classroomData.merge(kahootData, on='username')
 
     merged_df.to_json(os.path.join(app.config['DOWNLOAD_FOLDER'], "merged.json"))
