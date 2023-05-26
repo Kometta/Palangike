@@ -19,6 +19,7 @@ import openpyxl
 from pathlib import Path
 
 from kahoot import fetch_kahoot_reports
+import lrs
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/classroom.courses.readonly',
@@ -48,6 +49,9 @@ DB_DATABASE = config.get('DB_NAME')
 DB_DATAHOST = config.get('DB_HOST')
 kahoot_username = config.get('KAHOOT_USER')
 kahoot_password = config.get('KAHOOT_PASS')
+lrs_endpoint = config.get('LRS_ENDPOINT')
+lrs_username = config.get('LRS_USER')
+lrs_password = config.get('LRS_PASS')
 
 
 def extract_data_from_excel(filename):
@@ -371,6 +375,9 @@ def extract():
 
     fetch_kahoot_reports(username=kahoot_username,\
                      password=kahoot_password, download_dir=str(path))
+    
+    with open(os.path.join(app.config['DOWNLOAD_FOLDER'], 'merged.json')) as file:
+        lrs.send_statements_to_lrs(endpoint=lrs_endpoint,username=lrs_username, password=lrs_password, file=file) 
 
     # Get the list of Excel files in the current directory
     json_files = [file for file in os.listdir(app.config['UPLOAD_FOLDER']) if file.endswith('.xlsx')]
