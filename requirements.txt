@@ -7,3 +7,4 @@ flask
 pandas
 csv
 mysql-connector-python
+selenium

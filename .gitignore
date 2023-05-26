@@ -6,3 +6,4 @@ venv
 downloads
 wenv
 config.json
+__pycache__

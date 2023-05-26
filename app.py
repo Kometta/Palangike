@@ -18,6 +18,8 @@ from googleapiclient.errors import HttpError
 import openpyxl
 from pathlib import Path
 
+from kahoot import fetch_kahoot_reports
+
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/classroom.courses.readonly',
           'https://www.googleapis.com/auth/classroom.student-submissions.students.readonly',
@@ -44,6 +46,8 @@ DB_USERNAME = config.get('DB_USER')
 DB_PASSWORD = config.get('DB_PASS')
 DB_DATABASE = config.get('DB_NAME')
 DB_DATAHOST = config.get('DB_HOST')
+kahoot_username = config.get('KAHOOT_USER')
+kahoot_password = config.get('KAHOOT_PASS')
 
 
 def extract_data_from_excel(filename):
@@ -362,6 +366,11 @@ def kahoot():
 
 @app.route('/extract', methods=['POST'])
 def extract():
+
+    path = app.config['UPLOAD_FOLDER']
+
+    fetch_kahoot_reports(username=kahoot_username,\
+                     password=kahoot_password, download_dir=str(path))
 
     # Get the list of Excel files in the current directory
     json_files = [file for file in os.listdir(app.config['UPLOAD_FOLDER']) if file.endswith('.xlsx')]
